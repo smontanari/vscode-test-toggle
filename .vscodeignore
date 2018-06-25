@@ -1,0 +1,5 @@
+.vscode/**
+spec/**
+.gitignore
+jsconfig.json
+.eslintrc.json

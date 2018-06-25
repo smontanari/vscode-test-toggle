@@ -1,0 +1,80 @@
+{
+  "name": "vscode-test-toggle",
+  "displayName": "Test Toggle",
+  "description": "Toggle between source and test code",
+  "version": "0.0.1",
+  "publisher": "smontanari",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smontanari/vscode-test-toggle"
+  },
+  "engines": {
+    "vscode": "^1.23.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.testToggle"
+  ],
+  "main": "./extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.testToggle",
+        "title": "Toggle source/test"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.testToggle",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "TestToggle configuration",
+      "type": "object",
+      "properties": {
+        "testToggle.testNameRegExp": {
+          "type": "string",
+          "description": "RegExp override to match test filenames",
+          "default": "(\\.|_|-)+(specs?|tests?)$"
+        },
+        "testToggle.paths.source": {
+          "type": "array",
+          "description": "Optional list of paths where source files are contained",
+          "default": []
+        },
+        "testToggle.paths.test": {
+          "type": "array",
+          "description": "Optional list of paths where test files are contained",
+          "default": []
+        },
+        "testToggle.excludePattern": {
+          "type": "string",
+          "description": "Optional glob expression of paths to exclude when searching files",
+          "default": ""
+        }
+      }
+    }
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "jasmine"
+  },
+  "devDependencies": {
+    "@types/node": "^7.0.43",
+    "eslint": "^4.19.1",
+    "jasmine": "^3.1.0",
+    "typescript": "^2.9.1",
+    "vscode": "^1.1.18"
+  },
+  "dependencies": {
+    "lodash.clone": "^4.5.0",
+    "lodash.first": "^3.0.0",
+    "lodash.last": "^3.0.0"
+  }
+}
