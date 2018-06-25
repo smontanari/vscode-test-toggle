@@ -2,7 +2,7 @@
   "name": "vscode-test-toggle",
   "displayName": "Test Toggle",
   "description": "Toggle between source and test code",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "smontanari",
   "license": "MIT",
   "repository": {
