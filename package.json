@@ -63,7 +63,10 @@
   },
   "scripts": {
     "postinstall": "node ./node_modules/vscode/bin/install",
-    "test": "jasmine"
+    "test": "jasmine",
+    "lint": "./node_modules/.bin/eslint extension.js lib spec --quiet",
+    "preversion": "npm run test && npm run lint",
+    "postversion": "git push && git push --tags"
   },
   "devDependencies": {
     "@types/node": "^7.0.43",
