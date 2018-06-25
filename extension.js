@@ -4,6 +4,7 @@ const CodeDocument = require('./lib/code_document');
 const WorkspaceDecorator = require('./lib/workspace_decorator');
 
 const EXTENSION_NAME = 'testToggle';
+const ERROR_MSG_TIMEOUT = 5000;
 
 const activate = (context) => {
   const workspace = WorkspaceDecorator.for(vscode.workspace, EXTENSION_NAME);
@@ -25,7 +26,7 @@ const activate = (context) => {
       .then(vscode.workspace.openTextDocument)
       .then(
         vscode.window.showTextDocument,
-        error => vscode.window.setStatusBarMessage(`testToggle error: ${error.message}`)
+      error => vscode.window.setStatusBarMessage(`testToggle error: ${error.message}`, ERROR_MSG_TIMEOUT)
       );
   });
 
