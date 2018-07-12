@@ -36,6 +36,8 @@ describe('CodeDocument', () => {
       expect(subject.pathCheck.test('/some/path/filename.spec.prg')).toBe(true);
       expect(subject.pathCheck.test('/some/path/filename-spec.prg')).toBe(true);
       expect(subject.pathCheck.test('/some/path/filename_test.prg')).toBe(true);
+      expect(subject.pathCheck.test('/some/path/another_filename_spec.prg')).toBe(false);
+      expect(subject.pathCheck.test('/some/path/filename_different_spec.prg')).toBe(false);
       expect(subject.pathCheck.test('/some/path/filename.prg')).toBe(false);
       expect(subject.pathCheck.test('/some/path/filenameSpec.prg')).toBe(false);
       expect(subject.pathCheck.test('/some/path/filenameTest.prg')).toBe(false);
@@ -68,6 +70,7 @@ describe('CodeDocument', () => {
     it('verifies multiple source check paths', () => {
       expect(subject.pathCheck.source('/some/path/filename.prg')).toBe(true);
       expect(subject.pathCheck.source('/some/other/path/filename.prg')).toBe(true);
+      expect(subject.pathCheck.source('/some/path/filename_different.prg')).toBe(false);
       expect(subject.pathCheck.source('/some/path/another_filename.prg')).toBe(false);
     });
   });
