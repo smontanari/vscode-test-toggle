@@ -22,7 +22,7 @@ const activate = (context) => {
       return;
     }
 
-    return fileToggle.fromDocument(new CodeDocument(activeEditor.document, new RegExp(testNameRegExp)))
+    return fileToggle.fromDocument(new CodeDocument(activeEditor.document, testNameRegExp))
       .then(vscode.workspace.openTextDocument)
       .then(
         vscode.window.showTextDocument,

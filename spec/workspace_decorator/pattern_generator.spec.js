@@ -6,9 +6,8 @@ const CodeDocument = require('../../lib/code_document');
 const PatternGenerator = require('../../lib/workspace_decorator/pattern_generator');
 
 describe('PatternGenerator', () => {
-  var mockWorkspace, mockConfiguration, mockDocument;
+  var mockWorkspace, mockDocument;
   beforeEach(() => {
-    mockConfiguration = jasmine.createSpyObj('configuration', ['get']);
     mockWorkspace = {
       getWorkspaceFolder: jasmine.createSpy().and.returnValue({
         uri: { fsPath: '/path/to/workspace' }
@@ -23,14 +22,9 @@ describe('PatternGenerator', () => {
   describe('when no project paths have been defined', () => {
     var patterns;
     beforeEach(() => {
-      mockConfiguration.get.and.returnValue({ source: [], test: [] });
-      patterns = new PatternGenerator(mockWorkspace, mockConfiguration).listPatterns(
+      patterns = new PatternGenerator(mockWorkspace, { source: [], test: [] }).listPatterns(
         new CodeDocument(mockDocument, jasmine.extensionProperties.testNameRegExp),
         'source', 'test');
-    });
-
-    it('reads the configuration', () => {
-      expect(mockConfiguration.get).toHaveBeenCalledWith('paths');
     });
 
     it('has a first pattern scanning the base folder of the code document', () => {
@@ -49,15 +43,10 @@ describe('PatternGenerator', () => {
   describe('when test project paths have been defined', () => {
     var patterns;
     beforeEach(() => {
-      mockConfiguration.get.and.returnValue({ source: [], test: ['unit_tests', 'integration_tests', 'e2e_tests'] });
       spyOn(fs, 'existsSync').and.returnValues(true, false, true);
-      patterns = new PatternGenerator(mockWorkspace, mockConfiguration).listPatterns(
+      patterns = new PatternGenerator(mockWorkspace, { source: [], test: ['unit_tests', 'integration_tests', 'e2e_tests'] }).listPatterns(
         new CodeDocument(mockDocument, jasmine.extensionProperties.testNameRegExp),
         'source', 'test');
-    });
-
-    it('reads the configuration', () => {
-      expect(mockConfiguration.get).toHaveBeenCalledWith('paths');
     });
 
     it('has a first pattern scanning the base folder of the code document', () => {
@@ -82,15 +71,14 @@ describe('PatternGenerator', () => {
   describe('when source and test project paths have been defined', () => {
     var patterns;
     beforeEach(() => {
-      mockConfiguration.get.and.returnValue({
-        source: ['src', 'some'],
-        test: ['unit_tests', 'integration_tests', 'e2e_tests']
-      });
       spyOn(fs, 'existsSync').and.returnValues(
         false, false, true,
         true, false, false,
         false, false, true);
-      patterns = new PatternGenerator(mockWorkspace, mockConfiguration).listPatterns(
+      patterns = new PatternGenerator(mockWorkspace, {
+        source: ['src', 'some'],
+        test: ['unit_tests', 'integration_tests', 'e2e_tests']
+      }).listPatterns(
         new CodeDocument(mockDocument, jasmine.extensionProperties.testNameRegExp),
         'source', 'test');
     });

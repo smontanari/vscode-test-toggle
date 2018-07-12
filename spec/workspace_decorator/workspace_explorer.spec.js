@@ -2,13 +2,9 @@
 const WorkspaceExplorer = require('../../lib/workspace_decorator/workspace_explorer');
 
 describe('WorkspaceExplorer', () => {
-  var subject, mockConfiguration, mockWorkspace;
+  var subject, mockWorkspace;
 
   beforeEach(() => {
-    mockConfiguration = {
-      get: jasmine.createSpy().and.returnValue('exclude-pattern')
-    };
-
     mockWorkspace = {
       findFiles: jasmine.createSpy().and.returnValues(
         Promise.resolve([
@@ -22,11 +18,7 @@ describe('WorkspaceExplorer', () => {
       )
     };
 
-    subject = new WorkspaceExplorer(mockWorkspace, mockConfiguration);
-  });
-
-  it('reads the configuration', () => {
-    expect(mockConfiguration.get).toHaveBeenCalledWith('excludePattern');
+    subject = new WorkspaceExplorer(mockWorkspace, 'exclude-pattern');
   });
 
   it('returns the first found file', (done) => {
