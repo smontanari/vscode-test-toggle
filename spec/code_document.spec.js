@@ -44,7 +44,7 @@ describe('CodeDocument', () => {
         ['spec', 'test'].forEach(pattern => {
           expect(subject.pathCheck.test(`/some/path/filename${separator}${pattern}.type1`)).toBe(true);
           expect(subject.pathCheck.test(`/some/path/filename${separator}${pattern}.type2`)).toBe(true);
-        })
+        });
       });
     });
 
@@ -61,7 +61,7 @@ describe('CodeDocument', () => {
       ['_', '.', '-'].forEach(separator => {
         ['spec', 'test'].forEach(pattern =>
           expect(subject.pathCheck.test(`/some/path/filename${separator}${pattern}.type3`)).toBe(false)
-        )
+        );
       });
     });
   });
@@ -101,7 +101,7 @@ describe('CodeDocument', () => {
     });
 
     it('fails the test check path for filenames with different type', () => {
-      expect(subject.pathCheck.source(`/some/path/filename.type3`)).toBe(false)
+      expect(subject.pathCheck.source('/some/path/filename.type3')).toBe(false);
       expect(subject.pathCheck.source('/some/other/path/filename.type3')).toBe(false);
     });
   });

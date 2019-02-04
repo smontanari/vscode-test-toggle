@@ -3,7 +3,7 @@ const FileToggle = require('../lib/file_toggle');
 const Workspace = require('../lib/workspace_decorator');
 
 describe('FileToggle', () => {
-  var subject, mockDocument, mockWorkspace, mockWorkspace;
+  var subject, mockDocument, mockWorkspace;
 
   beforeEach(() => {
     mockDocument = {
