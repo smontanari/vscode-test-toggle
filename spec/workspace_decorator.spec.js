@@ -11,15 +11,13 @@ describe('WorkspaceDecorator', () => {
     mockConfiguration2 = jasmine.createSpyObj('configuration2', ['get']);
   });
 
-  describe('reading configuration', () => {
-    it('reads the configuration', () => {
+  describe('returning the configuration', () => {
+    it('throws an error if the testNameRegExp is missing', () => {
       mockWorkspace.getConfiguration.and.returnValue(mockConfiguration);
-      mockConfiguration.get.and.returnValue('config-value');
+      mockConfiguration.get.and.returnValue();
 
-      expect(Workspace.for(mockWorkspace, 'test-ext').readConfiguration('foo')).toEqual('config-value');
-
-      expect(mockWorkspace.getConfiguration).toHaveBeenCalledWith('test-ext');
-      expect(mockConfiguration.get).toHaveBeenCalledWith('foo');
+      expect(() => Workspace.for(mockWorkspace, 'test-ext').configuration()).toThrowError();
+      expect(mockConfiguration.get).toHaveBeenCalledWith('testNameRegExp');
     });
 
     it('reads the configuration every time', () => {
@@ -28,8 +26,8 @@ describe('WorkspaceDecorator', () => {
       mockConfiguration2.get.and.returnValue('config-value2');
 
       let workspace = Workspace.for(mockWorkspace, 'test-ext');
-      expect(workspace.readConfiguration('foo')).toEqual('config-value');
-      expect(workspace.readConfiguration('foo')).toEqual('config-value2');
+      expect(workspace.configuration().get('foo')).toEqual('config-value');
+      expect(workspace.configuration().get('foo')).toEqual('config-value2');
     });
   });
 });

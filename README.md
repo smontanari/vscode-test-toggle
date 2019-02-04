@@ -28,6 +28,37 @@ This extension contributes the following settings:
 * `testToggle.paths.source`: list of available _source_ paths to use when searching for source files (default: `[]`)
 * `testToggle.paths.test`: list of available _test_ paths to use when searching for test files (default: `[]`)
 * `testToggle.excludePattern`: glob expression used to exclude particular paths when searching for files (default: empty string)
+* `testToggle.typeMappings`: additional file type mappings to help finding corresponding source/test files with different type/extension.
+
+### Workspace Settings examples
+* Extending the `testNameRegExp` to use uppercase (`Test`) or lowercase (`test`) suffixes:
+```json
+{
+  "testToggle.testNameRegExp": "(\\.|_|-)+(t|T)est$"
+}
+```
+* Adding source and test paths:
+```json
+{
+  "testToggle.paths.source": ["app", "lib"],
+  "testToggle.paths.test": ["spec", "e2e"]
+}
+```
+* Excluding paths from search:
+```json
+{
+  "testToggle.excludePattern": "node_modules/"
+}
+```
+* Using additional type mappings:
+```json
+{
+  "testToggle.typeMappings": {
+    "vue": "js",
+    "jsx": "js"
+  }
+}
+```
 
 ## Release Notes
 
