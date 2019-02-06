@@ -18,11 +18,11 @@ For instance in a _Rails_ project you may have an `app`, `configuration` and a `
 Given an open file/document, this extension compiles an ordered list of _candidate folders_ that may contain the corresponding test/source file. It then scans those folders sequentially until it finds (or not) the target document to toggle to.
 - The first candidate folder is always the same folder in which the current document lives
 - The last candidate folder is always the root of the project
-- The presence of other folders depends on the source and test `paths` extension setting (see below)
+- The presence of other folders depends on the source and test `paths` extension setting
 
 ## Extension Settings
 
-This extension contributes the following settings:
+This extension provides the following configuration options:
 
 * `testToggle.testNameRegExp`: regular expression used to match a test filename (see `package.json` for the default value)
 * `testToggle.paths.source`: list of available _source_ paths to use when searching for source files (default: `[]`)
@@ -31,7 +31,7 @@ This extension contributes the following settings:
 * `testToggle.typeMappings`: additional file type mappings to help finding corresponding source/test files with different type/extension.
 
 ### Workspace Settings examples
-* Extending the `testNameRegExp` to use uppercase (`Test`) or lowercase (`test`) suffixes:
+* Changing the `testNameRegExp` to search for test files that have a suffix using uppercase (`Test`) or lowercase (`test`):
 ```json
 {
   "testToggle.testNameRegExp": "(\\.|_|-)+(t|T)est$"
