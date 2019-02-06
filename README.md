@@ -63,5 +63,3 @@ This extension contributes the following settings:
 ## Release Notes
 
 See the [CHANGELOG](./CHANGELOG.md).
-
-This first release may not be perfect, I will appreciate any feedback on bugs/improvements.

@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [0.1.0]
+### Added
+- `typeMappings` option to allow mapping of different file types for source/test search
+
 ## [0.0.3]
 ### Changed
 - Improved test file path check
